@@ -4,21 +4,18 @@ EXPOSE 7777/udp
 EXPOSE 15000/udp
 EXPOSE 15777/udp
 
-RUN ./steamcmd.sh \
-       +force_install_dir /home/steam/satisfactory-dedicated \
-       +@sSteamCmdForcePlatformBitness 64 \
-       +login anonymous \
-       +app_update 1690800 -beta public validate \
-       +quit
+ENV HOME="/home/steam"
+ENV STEAMUSER="anonymous"
+ENV SERVERIP="0.0.0.0"
+ENV SERVERQUERYPORT="15777"
+ENV BEACONPORT="15000"
+ENV PORT="7777"
+ENV STEAMAPPID="1690800"
+ENV STEAMBETAFLAG="public"
+ENV GAMECONFIGDIR="/home/steam/config/gamefiles/FactoryGame/Saved"
 
-WORKDIR ../satisfactory-dedicated
+RUN mkdir -p /home/steam/config && chown steam:steam /home/steam/
 
-RUN ./FactoryServer.sh \
-      -multihome=192.168.1.4 \
-      -ServerQueryPort=15777 \
-      -BeaconPort=15000 \
-      -Port=7777 \
-      -log \
-      -unattended \
-      -DisablePacketRouting \
-      -DisableSeasonalEvents \
+COPY init.sh /
+
+ENTRYPOINT [ "bash", "/init.sh" ]
