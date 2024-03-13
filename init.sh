@@ -25,6 +25,5 @@ exec ./FactoryServer.sh \
   -ServerQueryPort="$SERVERQUERYPORT" \
   -BeaconPort="$BEACONPORT" \
   -Port="$PORT" \
-  -log \
   -unattended \
   -DisablePacketRouting
