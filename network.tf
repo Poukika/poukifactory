@@ -51,32 +51,11 @@ resource "aws_security_group" "poukifactory_sg" {
   }
 
   egress {
-    from_port   = 15777
-    to_port     = 15777
-    protocol    = "udp"
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  egress {
-    from_port   = 15000
-    to_port     = 15000
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 7777
-    to_port     = 7777
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  #  egress {
-  #   from_port   = 0
-  #  to_port     = 0
-  # protocol    = -1
-  #cidr_blocks = ["0.0.0.0/0"]
-  #}
 
   tags = {
     Name = "poukifactory-sg"

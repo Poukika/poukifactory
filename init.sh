@@ -8,7 +8,6 @@ mkdir -p \
     "${HOME}/config/saved/server" \
     "${GAMECONFIGDIR}/Config/LinuxServer" \
     "${GAMECONFIGDIR}/Logs"
-    #"${GAMESAVESDIR}/server" \
 
 ./steamcmd.sh \
   +force_install_dir "$HOME"/config/gamefiles \
