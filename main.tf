@@ -13,72 +13,15 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
-## VPC
-resource "aws_vpc" "poukifactory_vpc" {
-  cidr_block = "10.0.0.0/16"
+resource "aws_instance" "ec2" {
+  ami                    = "ami-0ebd2bf0042bb3e85"
+  instance_type          = "t2.medium"
+  key_name               = "poukifactory_keypair"
+  user_data              = file("user_data.sh")
+  subnet_id              = aws_subnet.poukifactory_subnet.id
+  vpc_security_group_ids = [aws_security_group.poukifactory_sg.id]
+
   tags = {
-    Name = "poukifactory-vpc"
-  }
-}
-
-## Subnet
-resource "aws_subnet" "poukifactory_subnet" {
-  vpc_id                  = aws_vpc.poukifactory_vpc.id
-  cidr_block              = "10.0.0.0/24"
-  map_public_ip_on_launch = true
-  availability_zone       = "eu-west-3a"
-  tags = {
-    Name = "poukifactory-subnet",
-  }
-  depends_on = [aws_vpc.poukifactory_vpc]
-}
-
-## Security Group
-resource "aws_security_group" "poukifactory_sg" {
-  name   = "poukifactory_sg"
-  vpc_id = aws_vpc.poukifactory_vpc.id
-
-  ingress {
-    from_port   = 15777
-    to_port     = 15777
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    from_port   = 15000
-    to_port     = 15000
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 7777
-    to_port     = 7777
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 15777
-    to_port     = 15777
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 15000
-    to_port     = 15000
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 7777
-    to_port     = 7777
-    protocol    = "udp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    Name = "poukifactory-sg"
+    Name = "poukifactory-instance"
   }
 }
