@@ -13,6 +13,7 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
+# EC2
 resource "aws_instance" "ec2" {
   ami           = "ami-0ebd2bf0042bb3e85"
   instance_type = "t2.medium"

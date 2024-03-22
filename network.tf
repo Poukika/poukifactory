@@ -1,4 +1,4 @@
-## VPC
+#VPC
 resource "aws_vpc" "poukifactory_vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
@@ -6,7 +6,7 @@ resource "aws_vpc" "poukifactory_vpc" {
   }
 }
 
-## Subnet
+# Subnet
 resource "aws_subnet" "poukifactory_subnet" {
   vpc_id                  = aws_vpc.poukifactory_vpc.id
   cidr_block              = "10.0.0.0/24"
@@ -18,7 +18,7 @@ resource "aws_subnet" "poukifactory_subnet" {
   depends_on = [aws_vpc.poukifactory_vpc]
 }
 
-## Security Group
+# Security Group
 resource "aws_security_group" "poukifactory_sg" {
   name   = "poukifactory_sg"
   vpc_id = aws_vpc.poukifactory_vpc.id

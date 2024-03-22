@@ -1,3 +1,4 @@
+# IGW
 resource "aws_internet_gateway" "poukifactory_igw" {
   vpc_id = aws_vpc.poukifactory_vpc.id
 
@@ -8,6 +9,7 @@ resource "aws_internet_gateway" "poukifactory_igw" {
   depends_on = [aws_vpc.poukifactory_vpc]
 }
 
+# Route table
 resource "aws_default_route_table" "poukifactory_rtb" {
   default_route_table_id = aws_vpc.poukifactory_vpc.default_route_table_id
 
