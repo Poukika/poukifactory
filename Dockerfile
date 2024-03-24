@@ -13,6 +13,7 @@ ENV PORT="7777"
 ENV STEAMAPPID="1690800"
 ENV STEAMBETAFLAG="public"
 ENV GAMECONFIGDIR="/home/steam/config/gamefiles/FactoryGame/Saved"
+ENV GAMESAVESDIR="/home/steam/.config/Epic/FactoryGame/Saved/SaveGames"
 
 RUN mkdir -p /home/steam/config && chown steam:steam /home/steam/
 

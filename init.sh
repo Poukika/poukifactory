@@ -7,7 +7,8 @@ mkdir -p \
     "${HOME}/config/saved/blueprints" \
     "${HOME}/config/saved/server" \
     "${GAMECONFIGDIR}/Config/LinuxServer" \
-    "${GAMECONFIGDIR}/Logs"
+    "${GAMECONFIGDIR}/Logs" \
+    "${GAMESAVESDIR}/server" \
 
 ./steamcmd.sh \
   +force_install_dir "$HOME"/config/gamefiles \
@@ -17,8 +18,10 @@ mkdir -p \
   +app_update "$STEAMAPPID" -beta public validate \
   +quit
 
-cd "${HOME}/config/gamefiles" || exit 1
+rm -rf "${GAMESAVESDIR}"
+ln -sf "${HOME}/config/saved" "${GAMESAVESDIR}"
 
+cd "${HOME}/config/gamefiles" || exit 1
 exec ./FactoryServer.sh \
   -multihome="$SERVERIP" \
   -ServerQueryPort="$SERVERQUERYPORT" \
