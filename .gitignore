@@ -1,5 +1,12 @@
 .idea
 config
-.terraform
-.terraform.*
-terraform.*
+
+aws/.terraform
+aws/.terraform.*
+aws/terraform.*
+
+ovh/.terraform
+ovh/.terraform.*
+ovh/terraform.*
+
+poukifactory-kuber
