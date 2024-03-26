@@ -2,6 +2,14 @@
 
 ## Dedicated-server for satisfactory
 
+Ports:
+
+- 15000 udp
+- 15777 udp
+- 7777 udp
+
+Get docker image [here](https://hub.docker.com/r/pouki/satisfactory)
+
 ## AWS Cloud
 
 Environments variables:
@@ -19,11 +27,3 @@ Environments variables:
 - service_name: Project id OVH
 - endpoint: Region cluster
 - flavor: Instance type
-
-Ports:
-
-- 15000 udp
-- 15777 udp
-- 7777 udp
-
-Get docker image [here](https://hub.docker.com/r/pouki/satisfactory)
