@@ -8,5 +8,3 @@ aws/terraform.*
 ovh/.terraform
 ovh/.terraform.*
 ovh/terraform.*
-
-poukifactory-kuber

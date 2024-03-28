@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-statefulset
+  namespace: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-statefulset
+  serviceName: {{ .Release.Name }}-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-statefulset
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: {{ .Release.Name }}-app
+          imagePullPolicy: "Always"
+          image: pouki/satisfactory:latest
+          ports:
+            {{- range $i, $value := .Values.ports }}
+            {{- range $key, $val := $value }}
+            - containerPort: {{ $val.port }}
+              name: {{ $val.name }}
+            {{- end }}
+            {{- end }}
+          volumeMounts:
+            - mountPath: {{ .Values.mountPath }}
+              name: {{ .Release.Name }}-volume
+              readOnly: false
+      volumes:
+        - name: {{ .Release.Name }}-volume
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc

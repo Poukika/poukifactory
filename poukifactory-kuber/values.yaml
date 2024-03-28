@@ -1,0 +1,19 @@
+namespace: "poukifactory"
+
+storageClass: "csi-cinder-high-speed"
+
+ports:
+   - game:
+      name: game
+      port: 7777
+      type: UDP
+   - beacon:
+      name: beacon
+      port: 15000
+      type: UDP
+   - query:
+      name: query
+      port: 15777
+      type: UDP
+
+mountPath: "/home/steam/config"
