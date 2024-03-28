@@ -33,3 +33,9 @@ variable "flavor" {
   nullable = false
   default  = "b3-8"
 }
+
+variable "region" {
+  type     = string
+  nullable = false
+  default  = "GRA11"
+}

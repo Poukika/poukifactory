@@ -1,5 +1,7 @@
 FROM cm2network/steamcmd:latest
 
+USER steam:steam
+
 EXPOSE 7777/udp
 EXPOSE 15000/udp
 EXPOSE 15777/udp
@@ -15,8 +17,8 @@ ENV STEAMBETAFLAG="public"
 ENV GAMECONFIGDIR="/home/steam/config/gamefiles/FactoryGame/Saved"
 ENV GAMESAVESDIR="/home/steam/.config/Epic/FactoryGame/Saved/SaveGames"
 
-RUN mkdir -p /home/steam/config && chown steam:steam /home/steam/
+COPY --chown=steam:steam init.sh "/home/steam/"
 
-COPY init.sh /
+RUN mkdir -p "/home/steam/config"
 
-ENTRYPOINT [ "bash", "/init.sh" ]
+ENTRYPOINT [ "bash", "/home/steam/init.sh" ]

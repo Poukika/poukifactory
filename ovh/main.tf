@@ -1,7 +1,7 @@
 resource "ovh_cloud_project_kube" "my_kube_cluster" {
   service_name = var.service_name
   name         = "poukifactory-cluster"
-  region       = "GRA11"
+  region       = var.region
 }
 
 resource "ovh_cloud_project_kube_nodepool" "node_pool" {

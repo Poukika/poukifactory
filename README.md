@@ -17,7 +17,7 @@ Environments variables:
 - access_key: aws access_key used by Terraform
 - secret_key: aws secret_key used by Terraform
 
-## OVH Cloud (cluster Kubernetes)
+## OVH Cloud (cluster Kubernetes) /!\ UDP ports not supported
 
 Environments variables:
 
